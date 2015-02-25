@@ -1,0 +1,90 @@
+http://www.dailylinuxnews.com/blog/2014/09/ubuntu-like-debian-font-rendering-using-infinality-font/
+http://www.webupd8.org/2013/06/install-openjdk-patched-with-font-fixes.html
+1. Install Infinality
+
+	sudo nano /etc/apt/sources.list
+
+	#Infinality Fonts
+	deb ttp://ppa.launchpad.net/no1wantdthisname/ppa/ubuntu trusty main
+	deb-src http://ppa.launchpad.net/no1wantdthisname/ppa/ubuntu trusty main
+
+ 	sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E985B27B
+	sudo apt-get update
+	sudo apt-get install fontconfig-infinality
+
+ 
+
+ 
+
+	To configure infinality font, follow these steps
+
+	cd /etc/fonts/infinality/
+
+	sudo bash infctl.sh setstyle
+
+	    Select a style:
+	    1) debug 3) linux 5) osx2 7) win98
+	    2) infinality 4) osx 6) win7 8) winxp
+	    #?
+
+	I chose 3 (i.e. linux).
+
+	 
+
+	Now lets change the font style.
+
+	sudo vi /etc/profile.d/infinality-settings.sh
+
+	    #################################################################
+	    ########################### EXAMPLES ############################
+	    #################################################################
+	    #
+	    # Set the USE_STYLE variable below to try each example.
+	    # Make sure to set your style in /etc/fonts/infinality.conf too.
+	    #
+	    # Possible options:
+	    #
+	    # DEFAULT – Use above settings. A compromise that should please most people.
+	    # OSX – Simulate OSX rendering
+	    # IPAD – Simulate iPad rendering
+	    # UBUNTU – Simulate Ubuntu rendering
+	    # LINUX – Generic “Linux” style – no snapping or certain other tweaks
+	    # WINDOWS – Simulate Windows rendering
+	    # WINDOWS7 – Simulate Windows rendering with normal glyphs
+	    # WINDOWS7LIGHT- Simulate Windows 7 rendering with lighter glyphs
+	    # WINDOWS – Simulate Windows rendering
+	    # VANILLA – Just subpixel hinting
+	    # CUSTOM – Your own choice. See below
+	    # —– Infinality styles —–
+	    # CLASSIC – Infinality rendering circa 2010. No snapping.
+	    # NUDGE – CLASSIC with lightly stem snapping and tweaks
+	    # PUSH – CLASSIC with medium stem snapping and tweaks
+	    # SHOVE – Full stem snapping and tweaks without sharpening
+	    # SHARPENED – Full stem snapping, tweaks, and Windows-style sharpening
+	    # INFINALITY – Settings I use
+	    # DISABLED – Act as though running without the extra infinality enhancements (just subpixel hinting).
+
+	    USE_STYLE=”UBUNTU”
+
+
+
+	// XFCE 
+	Xfce
+
+	Go to Settings -> Appearance.
+
+	    Tick the checkbox to Enable anti-aliasing
+	    Set Sub-pixel order to RGB
+	    Set Hinting to Slight
+
+2. Install Font OpenJDK Patchs 
+
+	sudo add-apt-repository ppa:no1wantdthisname/openjdk-fontfix
+	sudo apt-get update
+	sudo apt-get upgrade
+
+
+Revert changes
+
+	sudo apt-get install ppa-purge
+	sudo ppa-purge ppa:no1wantdthisname/openjdk-fontfix
